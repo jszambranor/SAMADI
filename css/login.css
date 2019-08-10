@@ -1,0 +1,30 @@
+body{
+    max-width: 100%;
+    margin:0 auto;
+    background-color: white;
+}
+#titulo{
+    height: 60px;
+    margin-top: 1%;
+    color: white;
+    font-size: 150%;
+
+}
+h5{
+    margin-top: 0%;
+}
+
+
+
+#icon-login{
+    color: #0884C8;
+}
+main{
+    max-width: 70%;
+}
+#section{
+    width: 70%;
+    margin-right: 0%;
+    margin-top: 2%;
+    margin-left: 0%;
+}
