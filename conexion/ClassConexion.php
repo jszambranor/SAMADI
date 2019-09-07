@@ -11,10 +11,10 @@ class Conexion
     return $this->get_Conexion();
   }
 
-  protected $host = "34.238.220.3";
-  protected $db = "SAMADI";
-  protected $user = "SAMADI";
-  protected $password = "@ISTG_593_Samadi#";
+  private $host = "34.238.220.3";
+  private $db = "SAMADI";
+  private $user = "SAMADI";
+  private $password = "@ISTG_593_Samadi#";
 
   private function ConexionSamadi()
   {
