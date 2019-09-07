@@ -7,18 +7,17 @@ class ModelPersonas
 
   function __construct()
   {
-
+    global  $$objConexion;
+    global  $$conexion;
+    try {
+      $$objConexion = new Conexion;
+      $$conexion = $this->objConexion->get_Conexion();
+    } catch (PDOException $e) {
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       die();
+     }
   }
-  private $objConexion;
-  private $conexion;
-
-  try {
-    $objConexion = new Conexion();
-    $conexion = $this->objConexion->get_Conexion();
-  } catch (PDOException $e) {
-    echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
-    die();
-  }
+  
 
 
   private function set_Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje)

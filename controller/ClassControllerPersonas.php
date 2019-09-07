@@ -7,18 +7,19 @@ class ControllerPersonas
 
   function __construct()
   {
+    global $$objInsertPerson = null;
+    global $$insertPerson = null;
 
+    try {
+      $$objInsertPerson = new ModelPersonas();
+      $$insertPerson = $this->objInsertPerson->set_Alumnos();
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+      die();
+    }
   }
 
-  private $objInsertPerson = null;
-  private $insertPerson = null;
 
-  try {
-    $this->objInsertPerson = new ModelPersonas();
-    $insertPerson = $this->objInsertPerson->set_Alumnos();
-  } catch (PDOException $e) {
-
-  }
 
 
   public function insert_Alumno($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje){
