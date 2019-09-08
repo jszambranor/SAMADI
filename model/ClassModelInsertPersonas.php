@@ -10,7 +10,7 @@ class ModelPersonas
 
   }
 
-  private function Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje)
+  private function Alumnos($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo,$arg_CodCarrera,$arg_CodNivel,$arg_CodParalelo,$arg_CodJornada,$arg_Discapacidad,$arg_Porcentaje)
   {
     try {
       $objConexion = new Conexion;
@@ -20,7 +20,7 @@ class ModelPersonas
        die();
      }
     try {
-      $query = "CALL SAMADI.set_Alumnos(:_CEDULA,:_NOMBRES,:_APELLIDOS,:_CORREO,:_CARRERA,:_JORNADA,:_NIVEL,:_PARALELO,:_DISCAPACIDAD,:_PORCENTAJE)";
+      $query = "CALL SAMADI.set_Alumnos(:_CEDULA,:_APELLIDOS,:_NOMBRES,:_CORREO,:_CARRERA,:_NIVEL,:_PARALELO,:_JORNADA,:_DISCAPACIDAD,:_PORCENTAJE)";
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
     }
@@ -35,15 +35,16 @@ class ModelPersonas
       echo "<script>alert('NO SE PUEDO ENVIAR LA CEDULA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
     try {
-      $stmt->bindParam(':_NOMBRES',$arg_NOMBRES,PDO::PARAM_STR);
-    } catch (PDOException $e) {
-      echo "<script>alert('NO SE PUEDO ENVIAR EL NOMBRE COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
-    }
-    try {
       $stmt->bindParam(':_APELLIDOS',$arg_Apellidos,PDO::PARAM_STR);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDO ENVIAR EL APELLIDO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
+    try {
+      $stmt->bindParam(':_NOMBRES',$arg_Nombres,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL NOMBRE COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
     try {
       $stmt->bindParam(':_CORREO',$arg_Correo,PDO::PARAM_STR);
     } catch (PDOException $e) {
@@ -55,11 +56,6 @@ class ModelPersonas
       echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DE LA CARRERA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
     try {
-      $stmt->bindParam(':_JORNADA',$arg_CodJornada,PDO::PARAM_STR);
-    } catch (PDOException $e) {
-      echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DE LA JORNADA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
-    }
-    try {
       $stmt->bindParam(':_NIVEL',$arg_CodNivel,PDO::PARAM_STR);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DEL NIVEL COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
@@ -68,6 +64,11 @@ class ModelPersonas
       $stmt->bindParam(':_PARALELO',$arg_CodParalelo,PDO::PARAM_STR);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DEL PARALELO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+    try {
+      $stmt->bindParam(':_JORNADA',$arg_CodJornada,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DE LA JORNADA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
     try {
         $stmt->bindParam(':_DISCAPACIDAD',$arg_Discapacidad,PDO::PARAM_STR);
@@ -97,7 +98,7 @@ class ModelPersonas
     }
   }
 
-  public function set_Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje){
-    return $this->Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje);
+  public function set_Alumnos($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo,$arg_CodCarrera,$arg_CodNivel,$arg_CodParalelo,$arg_CodJornada,$arg_Discapacidad,$arg_Porcentaje){
+    return $this->Alumnos($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo,$arg_CodCarrera,$arg_CodNivel,$arg_CodParalelo,$arg_CodJornada,$arg_Discapacidad,$arg_Porcentaje);
   }
 }

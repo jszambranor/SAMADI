@@ -81,7 +81,7 @@ class ModelConsultas
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option value="' . $data["COD_CARRERA"] . '">' . $data["NOMBRE_C"] . '</option>';
+      $cadena = $cadena.'<option value="' . $data["COD_CARRERA"] . '">' . $data["NOMBRE_CARRERA"] . '</option>';
     }
     return $cadena;
   }
@@ -117,7 +117,7 @@ class ModelConsultas
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option  value="' . $data["COD_JORNADA"] . '">' . $data["NOMBRE_JOR"] . '</option>';
+      $cadena = $cadena.'<option  value="' . $data["COD_JORNADA"] . '">' . $data["NOMBRE_JORNADA"] . '</option>';
     }
     return $cadena;
   }
