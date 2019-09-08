@@ -7,25 +7,24 @@ class ModelConsultas
 
   function __construct()
   {
-    global  $$objConexion;
-    global  $$conexion;
+
+  }
+
+  private function exists_alumno($arg_Cedula){
     try {
-      $$objConexion = new Conexion;
-      $$conexion = $this->objConexion->get_Conexion();
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
     } catch (PDOException $e) {
        echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
        die();
      }
-  }
-
-  private function exists_alumno($arg_Cedula){
     try {
       $query = "SELECT CEDULA FROM SAMADI.ALUMNOS WHERE CEDULA = :_CEDULA";
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA (CLASSMODELCONSULTAS)".$e->getMesagge()."')</script>";
     }
     try {
-      $stmt = $this->conexion->prepare($query);
+      $stmt = $conexion->prepare($query);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA (CLASSMODELCONSULTAS)".$e->getMesagge()."')</script>";
     }
@@ -52,66 +51,94 @@ class ModelConsultas
   }
 
   private function niveles(){
-    $query = "SELECT * FROM SAMADI.CURSOS";
-    $stmt=$this->conexion->prepare($query);
+    try {
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       die();
+     }
+    $query = "SELECT * FROM SAMADI.NIVELES";
+    $stmt=$conexion->prepare($query);
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option style="color:#0E47A1;" value="' . $data["COD_NIVEL"] . '">' . $data["NOMBRE_NIVEL"] . '</option>';
+      $cadena = $cadena.'<option value="' . $data["COD_NIVEL"] . '">' . $data["NOMBRE_NIVEL"] . '</option>';
     }
     return $cadena;
   }
 
   private function carreras(){
+    try {
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       die();
+     }
     $query = "SELECT * FROM SAMADI.CARRERAS";
-    $stmt=$this->conexion->prepare($query);
+    $stmt=$conexion->prepare($query);
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option style="color:#0E47A1;" value="' . $data["COD_CARRERA"] . '">' . $data["NOMBRE_C"] . '</option>';
+      $cadena = $cadena.'<option value="' . $data["COD_CARRERA"] . '">' . $data["NOMBRE_C"] . '</option>';
     }
     return $cadena;
   }
 
   private function paralelos(){
+    try {
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       die();
+     }
     $query = "SELECT * FROM SAMADI.PARALELOS";
-    $stmt=$this->conexion->prepare($query);
+    $stmt=$conexion->prepare($query);
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option style="color:#0E47A1;" value="' . $data["COD_PARALELO"] . '">' . $data["COD_PARALELO"] . '</option>';
+      $cadena = $cadena.'<option value="' . $data["COD_PARALELO"] . '">' . $data["COD_PARALELO"] . '</option>';
     }
     return $cadena;
   }
 
   private function jornadas(){
+    try {
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       die();
+     }
     $query = "SELECT * FROM SAMADI.JORNADAS";
-    $stmt=$this->conexion->prepare($query);
+    $stmt=$conexion->prepare($query);
     $stmt->execute();
     $cadena = null;
     while($data=$stmt->fetch()){
-      $cadena = $cadena.'<option style="color:#0E47A1;" value="' . $data["COD_JORNADA"] . '">' . $data["NOMBRE_JOR"] . '</option>';
+      $cadena = $cadena.'<option  value="' . $data["COD_JORNADA"] . '">' . $data["NOMBRE_JOR"] . '</option>';
     }
     return $cadena;
   }
 
   public function get_Jornadas(){
-    $this->jornadas();
+    return $this->jornadas();
   }
 
   public function get_Paralelos(){
-    $this->paralelos();
+    return $this->paralelos();
   }
 
   public function get_Carreras(){
-    $this->carreras();
+    return $this->carreras();
   }
 
   public function get_Niveles(){
-    $this->niveles();
+    return $this->niveles();
   }
 
   public function get_Exists_Alumno($arg_Cedula){
-    $this->exists_alumno($arg_Cedula);
+    return $this->exists_alumno($arg_Cedula);
   }
 }

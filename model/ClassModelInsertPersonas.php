@@ -7,28 +7,25 @@ class ModelPersonas
 
   function __construct()
   {
-    global  $$objConexion;
-    global  $$conexion;
+
+  }
+
+  private function Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje)
+  {
     try {
-      $$objConexion = new Conexion;
-      $$conexion = $this->objConexion->get_Conexion();
+      $objConexion = new Conexion;
+      $conexion = $objConexion->get_Conexion();
     } catch (PDOException $e) {
        echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
        die();
      }
-  }
-  
-
-
-  private function set_Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje)
-  {
     try {
       $query = "CALL SAMADI.set_Alumnos(:_CEDULA,:_NOMBRES,:_APELLIDOS,:_CORREO,:_CARRERA,:_JORNADA,:_NIVEL,:_PARALELO,:_DISCAPACIDAD,:_PORCENTAJE)";
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
     }
     try {
-      $stmt=$this->conexion->prepare($query);
+      $stmt=$conexion->prepare($query);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
     }
@@ -68,7 +65,7 @@ class ModelPersonas
       echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DEL NIVEL COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
     try {
-      $stmt->bindParam(':_PARALELO',$arg_CodParalelo,PARAM::STR);
+      $stmt->bindParam(':_PARALELO',$arg_CodParalelo,PDO::PARAM_STR);
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDO ENVIAR EL CODIGO DEL PARALELO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
     }
@@ -87,10 +84,10 @@ class ModelPersonas
       return 3;
     }else {
       $objConsulta = new ModelConsultas();
-      $consultas = $objConsulta->exists_Alumno($arg_Cedula);
+      $consultas = $objConsulta->get_Exists_Alumno($arg_Cedula);
       if ($consultas == 1) {
         return 2;
-      }elseif ($cosnultas == 2) {
+      }elseif ($consultas == 2) {
         if ($stmt->execute()) {
           return 1;
         }else {
@@ -100,6 +97,7 @@ class ModelPersonas
     }
   }
 
-
-
+  public function set_Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje){
+    return $this->Alumnos($arg_Cedula,$arg_Nombres,$arg_Apellidos,$arg_Correo,$arg_CodCarrera,$arg_CodJornada,$arg_CodNivel,$arg_CodParalelo,$arg_Discapacidad,$arg_Porcentaje);
+  }
 }
