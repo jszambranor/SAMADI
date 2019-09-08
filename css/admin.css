@@ -99,6 +99,18 @@ main {
   border-radius: 15px 15px 0px 0px;
 }
 
+.tittle-login {
+  width: 100%;
+  background-color: #1D50AA;
+  height: 30%;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 15px 15px 0px 0px;
+}
+
+
 #row {
   margin-top: 1%;
   border-right: 1px solid #D5DBDB;
@@ -124,4 +136,5 @@ main {
     padding-left: 73%;
     color: white;
   }
+
 }
