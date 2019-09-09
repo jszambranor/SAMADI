@@ -50,13 +50,14 @@ class Estruct
         <br>
       </div></li>
       <li><a id="inicio" href="./"><i class="material-icons">home</i>Inicio</a></li>
-      <li><a href="#!"><i class="material-icons">logout</i>Cerrar Sesion</a></li>
+      <li><a href="../../conexion/logout.php"><i class="material-icons">logout</i>Cerrar Sesion</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Opciones</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Alumnos</a></li>
-      <li><a class="waves-effect" href="../nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Alumno</a></li>
-      <li><a class="waves-effect" href="../nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>
+      <li><a class="waves-effect" href="./nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Alumno</a></li>
+      <li><a class="waves-effect" href="./nuevoDocente.php"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>
+      <li><a class="waves-effect" href="./nuevoAdministrador.php"><i class="material-icons">assignment_ind</i>Nuevo Administrador</a></li>
       <li><div class="divider"></div></li>
     <!--  <li><a class="subheader">Docentes</a></li>
       <li><a class="waves-effect" href="#!"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>-->

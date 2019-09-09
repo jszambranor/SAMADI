@@ -1,13 +1,24 @@
 <?php
 session_start();
+if (isset($_SESSION['USER'])) {
+  if ($_SESSION['TYPE'] != 1) {
+    if ($_SESSION['TYPE'] == 2) {
+      echo '<meta http-equiv="refresh" content="0; url=../docente/index.php">';
+    }elseif ($_SESSION['TYPE'] == 3) {
+    echo '<meta http-equiv="refresh" content="0; url=../estudiante/index.php">';
+    }
+  }
+}else{
+  echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
+}
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
 require_once '../../controller/ClassControllerDocentes.php';
 require_once '../../model/ClassModelInsertPersonas.php';
-$cedula = '0992181293';
+
 $sidenav = new Estruct();
-$get_Sidenav = $sidenav->get_SideNavAdmin($cedula);
+$get_Sidenav = $sidenav->get_SideNavAdmin($_SESSION['USER']);
 $Consultas = new ModelConsultas();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

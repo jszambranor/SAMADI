@@ -1,5 +1,16 @@
 <?php
 session_start();
+if (isset($_SESSION['USER'])) {
+  if ($_SESSION['TYPE'] != 1) {
+    if ($_SESSION['TYPE'] == 2) {
+      echo '<meta http-equiv="refresh" content="0; url=../docente/index.php">';
+    }elseif ($_SESSION['TYPE'] == 3) {
+    echo '<meta http-equiv="refresh" content="0; url=../estudiante/index.php">';
+    }
+  }
+}else{
+  echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
+}
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
@@ -52,14 +63,29 @@ $get_Sidenav = $sidenav->get_SideNavAdmin($cedula);
             <img class="activator" src="../../images/icons/agregar-usuario.png" height="150px">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoAlumno.php">AGREGAR NUEVO ALUMNO</a><i class="material-icons right">more_vert</i></span>
+            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoDocente.php">AGREGAR NUEVO DOCENTE</a><i class="material-icons right">more_vert</i></span>
             <p></p>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO ALUMNO<i class="material-icons right">close</i></span>
-            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO ALUMNO A SAMADI</p>
+            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO DOCENTE<i class="material-icons right">close</i></span>
+            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO DOCENTE A SAMADI</p>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="../../images/icons/agregar-usuario.png" height="150px">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoDocente.php">AGREGAR NUEVO ADMINISTRADOR</a><i class="material-icons right">more_vert</i></span>
+            <p></p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO ADMINISTRADOR<i class="material-icons right">close</i></span>
+            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO ADMINISTRADOR A SAMADI</p>
+          </div>
+        </div>
+
 
         </div>
 

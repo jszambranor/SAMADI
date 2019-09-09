@@ -4,6 +4,15 @@ require_once './model/ClassModelConsultas.php';
 require_once './model/ClassModelLogin.php';
 require_once './controller/ClassControllerLogin.php';
 require_once './estruct/header.php';
+if (isset($_SESSION['USER'])) {
+  if ($_SESSION['TYPE'] != 1) {
+    if ($_SESSION['TYPE'] == 2) {
+      echo '<meta http-equiv="refresh" content="0; url=../docente/index.php">';
+    }elseif ($_SESSION['TYPE'] == 3) {
+    echo '<meta http-equiv="refresh" content="0; url=../estudiante/index.php">';
+    }
+  }
+}
 /*if (!isset($_SESSION['user'])) {
   header('location: ../../');
 }else{
