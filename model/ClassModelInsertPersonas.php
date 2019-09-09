@@ -20,7 +20,7 @@ class ModelPersonas
        die();
      }
     try {
-      $query = "CALL SAMADI.set_Alumnos(:_CEDULA,:_APELLIDOS,:_NOMBRES,:_CORREO,:_CARRERA,:_NIVEL,:_PARALELO,:_JORNADA,:_DISCAPACIDAD,:_PORCENTAJE)";
+      $query = "CALL SAMADI.SET_ALUMNOS(:_CEDULA,:_APELLIDOS,:_NOMBRES,:_CORREO,:_CARRERA,:_NIVEL,:_PARALELO,:_JORNADA,:_DISCAPACIDAD,:_PORCENTAJE)";
     } catch (PDOException $e) {
       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
     }
@@ -85,7 +85,127 @@ class ModelPersonas
       return 3;
     }else {
       $objConsulta = new ModelConsultas();
-      $consultas = $objConsulta->get_Exists_Alumno($arg_Cedula);
+      $consultas = $objConsulta->get_Exists_Personas($arg_Cedula);
+      if ($consultas == 1) {
+        return 2;
+      }elseif ($consultas == 2) {
+        if ($stmt->execute()) {
+          return 1;
+        }else {
+          return 0;
+        }
+      }
+    }
+  }
+
+  private function Docentes($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo){
+    try {
+      $objConexion = new Conexion();
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+      die();
+    }
+
+    try {
+      $query = "CALL SAMADI.SET_DOCENTES(:_CEDULA,:_APELLIDOS,:_NOMBRES,:_CORREO)";
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt=$conexion->prepare($query);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR LA CEDULA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+    try {
+      $stmt->bindParam(':_APELLIDOS',$arg_Apellidos,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL APELLIDO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+    try {
+      $stmt->bindParam(':_NOMBRES',$arg_Nombres,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL NOMBRE COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt->bindParam(':_CORREO',$arg_Correo,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL CORREO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    if (!isset($stmt)) {
+      return 3;
+    }else {
+      $objConsulta = new ModelConsultas();
+      $consultas = $objConsulta->get_Exists_Personas($arg_Cedula);
+      if ($consultas == 1) {
+        return 2;
+      }elseif ($consultas == 2) {
+        if ($stmt->execute()) {
+          return 1;
+        }else {
+          return 0;
+        }
+      }
+    }
+  }
+
+  private function Administrador($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo){
+    try {
+      $objConexion = new Conexion();
+      $conexion = $objConexion->get_Conexion();
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+      die();
+    }
+
+    try {
+      $query = "CALL SAMADI.SET_ADMINISTRADOR(:_CEDULA,:_APELLIDOS,:_NOMBRES,:_CORREO)";
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt=$conexion->prepare($query);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR LA CEDULA COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+    try {
+      $stmt->bindParam(':_APELLIDOS',$arg_Apellidos,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL APELLIDO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+    try {
+      $stmt->bindParam(':_NOMBRES',$arg_Nombres,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL NOMBRE COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    try {
+      $stmt->bindParam(':_CORREO',$arg_Correo,PDO::PARAM_STR);
+    } catch (PDOException $e) {
+      echo "<script>alert('NO SE PUEDO ENVIAR EL CORREO COMO PARAMETRO A LA CONSULTA'".$e->getMessage().")</script>";
+    }
+
+    if (!isset($stmt)) {
+      return 3;
+    }else {
+      $objConsulta = new ModelConsultas();
+      $consultas = $objConsulta->get_Exists_Personas($arg_Cedula);
       if ($consultas == 1) {
         return 2;
       }elseif ($consultas == 2) {
@@ -100,5 +220,13 @@ class ModelPersonas
 
   public function set_Alumnos($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo,$arg_CodCarrera,$arg_CodNivel,$arg_CodParalelo,$arg_CodJornada,$arg_Discapacidad,$arg_Porcentaje){
     return $this->Alumnos($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo,$arg_CodCarrera,$arg_CodNivel,$arg_CodParalelo,$arg_CodJornada,$arg_Discapacidad,$arg_Porcentaje);
+  }
+
+  public function set_Docentes($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo){
+    return $this->Docentes($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo);
+  }
+
+  public function set_Administrador($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo){
+    return $this->Administrador($arg_Cedula,$arg_Apellidos,$arg_Nombres,$arg_Correo);
   }
 }

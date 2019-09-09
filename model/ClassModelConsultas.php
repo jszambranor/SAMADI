@@ -10,7 +10,7 @@ class ModelConsultas
 
   }
 
-  private function exists_alumno($arg_Cedula){
+  private function exists_personas($arg_Cedula){
     try {
       $objConexion = new Conexion;
       $conexion = $objConexion->get_Conexion();
@@ -138,7 +138,7 @@ class ModelConsultas
     return $this->niveles();
   }
 
-  public function get_Exists_Alumno($arg_Cedula){
-    return $this->exists_alumno($arg_Cedula);
+  public function get_Exists_Personas($arg_Cedula){
+    return $this->exists_personas($arg_Cedula);
   }
 }

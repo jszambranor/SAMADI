@@ -3,6 +3,9 @@ session_start();
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
+require_once '../../controller/ClassControllerAlumnos.php';
+require_once '../../model/ClassModelInsertPersonas.php';
+
 /*if (!isset($_SESSION['user'])) {
   header('location: ../../');
 }else{
@@ -19,6 +22,25 @@ $jornada = $Consultas->get_Jornadas();
 $nivel= $Consultas->get_NIveles();
 $paralelo = $Consultas->get_Paralelos();
 $carrera =$Consultas->get_Carreras();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $Cedula = $_POST['cedula'];
+  $Nombres = $_POST['nombres'];
+  $Apellidos = $_POST['apellidos'];
+  $Correo = $_POST['mail'];
+  $CodCarrera = $_POST['carrera'];
+  $CodJornada = $_POST['jornada'];
+  $CodNivel = $_POST['nivel'];
+  $CodParalelo = $_POST['paralelo'];
+  $Discapacidad = $_POST['discapacidad'];
+  $Porcentaje = $_POST['porcentaje'];
+  $objControllerPersona = new ControllerAlumnos();
+  $mensaje = $objControllerPersona->insert_Alumno($Cedula,$Apellidos,$Nombres,$Correo,$CodCarrera,$CodNivel,$CodParalelo,$CodJornada,$Discapacidad,$Porcentaje);
+  //echo $mensaje;
+}else {
+  //echo "METODO DE ENVIO NO VALIDO";
+  //die();
+}
  ?>
 
 <!DOCTYPE html>
@@ -34,8 +56,13 @@ $carrera =$Consultas->get_Carreras();
     <header>
       <?php echo $get_Sidenav;  ?>
     </header>
-
+    <center>
+      <?php echo "<br><br><div class='estado'>".$mensaje."</div>"; ?>
+    </center>
     <main>
+
+
+      </div>
         <div class="section container">
             <div class="row">
               <div class="header">
@@ -43,7 +70,7 @@ $carrera =$Consultas->get_Carreras();
                   <span>REGISTRO DE NUEVO ALUMNO</span>
                 </div>
               </div>
-                <form class="col s12" method="POST" action="../../controller/ClassControllerPersonas.php">
+                <form class="col s12" method="POST" action="./nuevoAlumno.php">
                     <div class="row card-panel">
                         <div class="input-field col s12">
                             <input required="true"  id="cedula" name="cedula" type="text" class="validate" onkeyup="Mayus(this);" onkeypress="return soloNumeros(event)">
@@ -121,6 +148,17 @@ $carrera =$Consultas->get_Carreras();
       background-color: #D6EAF8;
       border-radius: 0px 50px 50px 0px;
       width: 90%;
+    }
+
+    .estado{
+      width: 20%;
+      color :white;
+      font-weight: bold;
+      font-size: 1rem;
+      background-color: red;
+      border-radius: 15px 15px 15px 15px;
+      margin-top: 0%;
+      text-align: center;
     }
 
     </style>

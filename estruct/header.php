@@ -56,6 +56,7 @@ class Estruct
       <li><div class="divider"></div></li>
       <li><a class="subheader">Alumnos</a></li>
       <li><a class="waves-effect" href="../nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Alumno</a></li>
+      <li><a class="waves-effect" href="../nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>
       <li><div class="divider"></div></li>
     <!--  <li><a class="subheader">Docentes</a></li>
       <li><a class="waves-effect" href="#!"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>-->
