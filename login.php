@@ -149,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         justify-content: center;
         margin: 0;
         padding: 0;
-        background-color: red;
       }
       .contenido{
         width: 100%;
