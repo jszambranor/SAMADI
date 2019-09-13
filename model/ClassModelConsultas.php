@@ -169,9 +169,58 @@ class ModelConsultas
         }
     }
 
+    private function datosCorreo($arg_User)
+    {
+        try {
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_Conexion();
+        } catch (PDOException $e) {
+            echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+            die();
+        }
+
+        try {
+            $query = "SELECT CEDULA FROM SAMADI.PERSONAS WHERE CORREO = :_USUARIO";
+        } catch (PDOException $e) {
+            echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+        }
+
+        try {
+            $stmt = $conexion->prepare($query);
+        } catch (PDOException $e) {
+            echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+        }
+
+        try {
+            $stmt->bindParam(':_USUARIO', $arg_User, PDO::PARAM_STR);
+        } catch (PDOException $e) {
+            echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().")</script>";
+        }
+
+        try {
+            if (isset($stmt)) {
+                if ($stmt->execute()) {
+                    $data = $stmt->fetch();
+                    return $data;
+                } else {
+                    return null;
+                }
+            } else {
+                echo "<script>alert('CONSULTA VACIA'".$e->getMessage().")</script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>alert('NO SE PUEDE EJECUTAR LA CONSULTA'".$e->getMessage().")</script>";
+        }
+    }
+
     public function get_Datos($arg_Cedula)
     {
         return $this->datos($arg_Cedula);
+    }
+
+    public function get_DatosCorreo($arg_Cedula)
+    {
+        return $this->datosCorreo($arg_Cedula);
     }
 
     public function get_Jornadas()

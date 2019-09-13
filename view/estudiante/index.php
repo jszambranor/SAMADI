@@ -3,6 +3,27 @@ session_start();
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
+require_once '../../model/ClassModelCatedras.php';
+/*if (isset($_SESSION['USER'])) {
+  if ($_SESSION['TYPE'] != 3) {
+    if ($_SESSION['TYPE'] == 1) {
+      echo '<meta http-equiv="refresh" content="0; url=../admin/index.php">';
+    }elseif ($_SESSION['TYPE'] == 2) {
+    echo '<meta http-equiv="refresh" content="0; url=../docente/index.php">';
+    }
+  }
+}else{
+  echo '<meta http-equiv="refresh" content="0; url=../../login.php">';
+}*/
+$objConsultas = new ModelConsultas();
+$cedula = $objConsultas->get_DatosCorreo($_SESSION['USER']);
+$objCatedras = new ModelCatedras();
+$catedras = $objCatedras->get_Catedras($cedula['CEDULA']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $codigo_clase = $_POST['codigo_catedra'];
+  $newClase = $objCatedras->set_NewClase($cedula['CEDULA'],$codigo_clase);
+}
  ?>
 
 <!DOCTYPE html>
@@ -25,20 +46,29 @@ require_once '../../estruct/header.php';
           <span>S A M </span>
         </div>
         <div id="avatar" class="right-items">
+          <a class="waves-effect modal-trigger" href="#modal2"><i class="material-icons">add</i></a>
           <img class="circle" src="../../images/estudiantes/mifoto.png" alt="">
         </div>
       </div>
     </header>
 
     <main>
+      <center>
       <div class="contenido">
         <div class="title">
           <span>MATERIAS</span>
         </div>
+        <div class="mensaje">
+        <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          echo $newClase;
+          echo '<meta http-equiv="refresh" content="2; url=./index.php">';
+        }  ?>
+        </div>
         <div class="materias">
-
+          <?php echo $catedras; ?>
         </div>
       </div>
+    </center>
 
     </main>
 
@@ -52,6 +82,14 @@ require_once '../../estruct/header.php';
       </ul>
 
       </div>
+
+      <div id="modal2" class="modal">
+        <form class="registro_clase" action="index.php" method="post">
+          <label for="codigo_catedra">INGRESA EL CODIGO DE LA CLASE</label>
+          <input id="cod_clase"  type="text" name="codigo_catedra" value=""><br>
+          <button id="registro" class="btn" type="submit" name="button">REGISTRAR</button>
+        </form>
+        </div>
 
     <style media="screen">
     .navbar {
@@ -71,11 +109,58 @@ require_once '../../estruct/header.php';
       align-items: center;
     }
 
+    .title{
+      width: 100%;
+      background-color: #02265E;
+      font-weight: bold;
+      font-size: 2rem;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
     .contenido{
       width: 80%;
+      margin-top: 5%;
+
+    }
+    .catedras{
+      width: 20%;
+      display: inline-block;
+      background-color: #FFFFFF;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1rem;
+      border-top: 2px solid #02265E;
+      border-right: 2px solid #02265E;
+      border-bottom: 2px solid #02265E;
+      border-left: 2px solid #02265E;
+      margin-top: 2%;
+      margin-bottom: 1%;
+      margin-left: 2%;
+    }
+    .nombre,.nombre a{
+      background-color: #02265E;
+      color: #FFFFFF;
+    }
+
+    .img{
+      width: 100%;
+      text-align: center;
+    }
+
+    .contenido .catedras .img img{
+      max-width: 90%;
+      text-align: center;
+      margin-left: 2%;
     }
     .right-items{
       float: right;
+      margin-top: 1%;
+    }
+
+    .right-items i{
+      color: #FFFFFF;
+      font-size: 3rem;
     }
 
     #avatar img{
@@ -88,10 +173,12 @@ require_once '../../estruct/header.php';
 
     .left-items{
       float: left;
+      margin-top: 1%;
     }
 
     .center-item{
       font-weight: bold;
+      margin-top: 2%;
     }
 
     #menu i{
@@ -101,9 +188,11 @@ require_once '../../estruct/header.php';
 
     #logo{
       display: inline-block;
+      color: #FFF;
+      font-weight: bold;
     }
 
-    .modal{
+    #modal1{
       width: 15%;
       padding: 0;
       margin: 0;
@@ -117,6 +206,31 @@ require_once '../../estruct/header.php';
       margin-left: 1%;
     }
 
+    #modal2{
+      width: 40%;
+      text-align: left;
+      border-top: 4px solid #02265E;
+      border-right: 4px solid #02265E;
+      border-bottom: 4px solid #02265E;
+      border-left: 4px solid #02265E;
+      height: 190px;
+    }
+
+    .registro_clase{
+      text-align: center;
+      margin-top: 5%;
+      font-weight: bold;
+    }
+
+    #cod_clase {
+      width: 70%;
+    }
+
+    #registro{
+      background-color: #02265E;
+    }
+
+
     .modal .slide-out li{
       border:1px;
       width: 100%;
@@ -129,6 +243,15 @@ require_once '../../estruct/header.php';
       padding-left: 6%;
       color: #02265E;
       font-weight: bold;
+    }
+
+    .mensaje{
+      background-color: red;
+      max-width: 40%;
+      color: #FFFFFF;
+      font-weight: bold;
+      margin-top: 3%;
+      text-align: center;
     }
 
 

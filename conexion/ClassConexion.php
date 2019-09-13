@@ -11,10 +11,10 @@ class Conexion
     return $this->get_Conexion();
   }
 
-  private $host = "34.238.220.3";
+  private $host = "35.176.226.143";
   private $db = "SAMADI";
   private $user = "SAMADI";
-  private $password = "@ISTG_593_Samadi#";
+  private $password = "@ISTG_2_Samadi";
 
   private function ConexionSamadi()
   {
