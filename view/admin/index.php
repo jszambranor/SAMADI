@@ -14,14 +14,6 @@ if (isset($_SESSION['USER'])) {
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
-/*if (!isset($_SESSION['user'])) {
-  header('location: ../../');
-}else{
-  $_SESSION['user'];
-  $_SESSION['type_user'];
-  $sidenav = new Estruct();
-  $get_Sidenav = $sidenav->get_SideNavAdmin($_SESSION['user']);
-}*/
 $cedula = '0992181293';
 $sidenav = new Estruct();
 $get_Sidenav = $sidenav->get_SideNavAdmin($cedula);

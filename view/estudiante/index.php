@@ -16,13 +16,14 @@ require_once '../../model/ClassModelCatedras.php';
   echo '<meta http-equiv="refresh" content="0; url=../../login.php">';
 }*/
 $objConsultas = new ModelConsultas();
-$cedula = $objConsultas->get_DatosCorreo($_SESSION['USER']);
+$cedula = $objConsultas->get_DatosCorreo(/*$_SESSION['USER']*/'jszambrano@est.itsgg.edu.ec');
 $objCatedras = new ModelCatedras();
 $catedras = $objCatedras->get_Catedras($cedula['CEDULA']);
+$nombres = $objConsultas->get_Datos($cedula['CEDULA']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $codigo_clase = $_POST['codigo_catedra'];
-  $newClase = $objCatedras->set_NewClase($cedula['CEDULA'],$codigo_clase);
+    $codigo_clase = $_POST['codigo_catedra'];
+    $newClase = $objCatedras->set_NewClase($cedula['CEDULA'], $codigo_clase);
 }
  ?>
 
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div id="avatar" class="right-items">
           <a class="waves-effect modal-trigger" href="#modal2"><i class="material-icons">add</i></a>
-          <img class="circle" src="../../images/estudiantes/mifoto.png" alt="">
+          <a href="#modal3" class="waves-effect modal-trigger"><img class="circle" src="../../images/estudiantes/mifoto.png" alt=""></a>
         </div>
       </div>
     </header>
@@ -59,10 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <span>MATERIAS</span>
         </div>
         <div class="mensaje">
-        <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           echo $newClase;
           echo '<meta http-equiv="refresh" content="2; url=./index.php">';
-        }  ?>
+        }
+ ?>
         </div>
         <div class="materias">
           <?php echo $catedras; ?>
@@ -90,6 +93,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <button id="registro" class="btn" type="submit" name="button">REGISTRAR</button>
         </form>
         </div>
+
+        <div id="modal3" class="modal">
+          <div class="nombres">
+            <span id="nombre">BIENVENIDO</span><br>
+            <span id="nombre"><?php echo $nombres['NOMBRES']; ?></span>
+            <span id="nombre"><?php echo $nombres['APELLIDOS']; ?></span>
+          </div>
+          <div class="link">
+            <a href="./micuenta.php?cedula="><i class="material-icons">account_circle</i> MI CUENTA</a><br>
+            <a href="../../conexion/logout.php"><i class="material-icons">logout</i> CERRAR SESIÓN</a>
+          </div>
+
+          </div>
 
     <style media="screen">
     .navbar {
@@ -216,6 +232,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       height: 190px;
     }
 
+    #modal3{
+      width: 12%;
+      text-align: left;
+      border-top: 4px solid #02265E;
+      border-right: 4px solid #02265E;
+      border-bottom: 4px solid #02265E;
+      border-left: 4px solid #02265E;
+      height: 150px;
+      margin-right:  0;
+      padding-right:  0;
+    }
+
     .registro_clase{
       text-align: center;
       margin-top: 5%;
@@ -254,7 +282,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       text-align: center;
     }
 
+    #nombre{
+      font-size: 15px;
+      font-weight: bold;
+      color: #02265E;
+      margin-left: 2%;
+    }
+    .nombre{
+      border-bottom: 1px solid #B2BABB;
+    }
 
+    .link{
+      text-align: left;
+      padding-top: 0%;
+    }
+
+    .modal .link a{
+      color: #02265E;
+      max-width: 100%;
+      font-weight: bold;
+      margin-top: 0%;
+      border:1px;
+      padding-top: 0%;
+      border-bottom: 1px solid #B2BABB;
+    }
+    .modal .link a i{
+      color: #02265E;
+    }
     </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>

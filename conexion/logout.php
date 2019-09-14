@@ -10,5 +10,5 @@ if (ini_get("session.use_cookies")) {
     );
 }
 session_destroy();
-echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
+echo '<meta http-equiv="refresh" content="0; url=../login.php">';
  ?>
