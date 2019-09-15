@@ -10,7 +10,7 @@ class Estruct
 
   }
 
-  private function sideNavAdmin($arg_Cedula){
+  private function modals($arg_Cedula){
     try {
       $objConexion = new Conexion;
       $conexion = $objConexion->get_Conexion();
@@ -18,113 +18,65 @@ class Estruct
        echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
        die();
      }
-    $query = "SELECT NOMBRES,APELLIDOS,CORREO,FOTO FROM SAMADI.PERSONAS WHERE CEDULA = :_CEDULA";
+    $query = "SELECT NOMBRES,APELLIDOS FROM SAMADI.PERSONAS WHERE CEDULA = :_CEDULA";
     $stmt=$conexion->prepare($query);
     $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
     $stmt->execute();
-    $data = $stmt->fetch();
-    $sidenav = '
-    <div class="navbar-fixed">
-      <div class="left1">
-          <a id="menu" href="#" data-target="slide-out" class="sidenav-trigger left"><i id="icons" class="material-icons">menu</i></a>
+    $nombres = $stmt->fetch();
+    $modals = '
+
+    <div class="navbar">
+      <div id="menu" class="left-items">
+        <a class="waves-effect modal-trigger" href="#modal1" ><i class="material-icons">menu</i></a>
+      </div>
+      <div id="logo" class="center-items">
+        <img src="../../images/logo.jpg" alt="">
+        <span>S A M </span>
+      </div>
+      <div id="avatar" class="right-items">
+        <a href="#modal3" class="waves-effect modal-trigger"><img class="circle" src="../../images/estudiantes/mifoto.png" alt=""></a>
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+      <ul class="slide-out">
+        <li><a class="li" id="temas" href="./index.php">INICIO</a></li>
+        <li><a class="li" id="actividadesli" href="./actividades.php">ACTIVIDADES</a></li>
+        <li><a class="li" id="guia" href="./materialapoyo.php">MATERIAL DE APOYO</a></li>
+        <li><a class="li" id="bibliografia" href="./bibliografias.php">BIBLIOGRAFÍAS</a></li>
+      </ul>
+
+      </div>
+
+      <div id="modal2" class="modal">
+        <form class="registro_clase" action="index.php" method="post">
+          <label for="codigo_catedra">INGRESA EL CODIGO DE LA CLASE</label>
+          <input id="cod_clase"  type="text" name="codigo_catedra" value=""><br>
+          <button id="registro" class="btn" type="submit" name="button">REGISTRAR</button>
+        </form>
         </div>
 
-        <div class="center1">
-          <span id="navbar-center">SAMADI</span>
-        </div>
-
-          <div class="right1">
-            <a id="navbar-right" href="sass.html"><i id="icons" class="material-icons">account_circle</i></a>
+        <div id="modal3" class="modal">
+          <div class="nombres">
+            <span id="nombre">BIENVENIDO</span><br>
+            <span id="nombre"><?php echo $nombres["NOMBRES"]; ?></span>
+            <span id="nombre"><?php echo $nombres["APELLIDOS"]; ?></span>
           </div>
-        </div>
-
-    <ul id="slide-out" class="sidenav">
-      <li><div class="user-view">
-        <div class="background">
-          <img src="../../images/office.jpg" width="100%" height="100%">
-        </div>
-        <a href="#user"><img class="circle" src="../../images/'.$data['FOTO'].'"></a>
-        <br>
-        <br>
-        <li><div class="divider"></div></li>
-        <br>
-      </div></li>
-      <li><a id="inicio" href="./"><i class="material-icons">home</i>Inicio</a></li>
-      <li><a href="../../conexion/logout.php"><i class="material-icons">logout</i>Cerrar Sesion</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Opciones</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Alumnos</a></li>
-      <li><a class="waves-effect" href="./nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Nuevo Alumno</a></li>
-      <li><a class="waves-effect" href="./nuevoDocente.php"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>
-      <li><a class="waves-effect" href="./nuevoAdministrador.php"><i class="material-icons">assignment_ind</i>Nuevo Administrador</a></li>
-      <li><div class="divider"></div></li>
-    <!--  <li><a class="subheader">Docentes</a></li>
-      <li><a class="waves-effect" href="#!"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>-->
-    </ul>';
-    return $sidenav;
-  }
-
-  private function sideNavEstudent($arg_Cedula){
-    try {
-      $objConexion = new Conexion;
-      $conexion = $objConexion->get_Conexion();
-    } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
-       die();
-     }
-    $query = "SELECT NOMBRES,APELLIDOS,CORREO,FOTO FROM SAMADI.PERSONAS WHERE CEDULA = :_CEDULA";
-    $stmt=$conexion->prepare($query);
-    $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
-    $stmt->execute();
-    $data = $stmt->fetch();
-    $sidenav = '
-    <div class="navbar-fixed">
-      <div class="left1">
-          <a id="menu" href="#" data-target="slide-out" class="sidenav-trigger left"><i id="icons" class="material-icons">menu</i></a>
-        </div>
-
-        <div class="center1">
-          <span id="navbar-center">SAMADI</span>
-        </div>
-
-          <div class="right1">
-            <a id="navbar-right" href="sass.html"><i id="icons" class="material-icons">account_circle</i></a>
+          <div class="link">
+            <a href="../micuenta.php?cedula="><i class="material-icons">account_circle</i> MI CUENTA</a><br>
+            <a href="../../conexion/logout.php"><i class="material-icons">logout</i> CERRAR SESIÓN</a>
           </div>
-        </div>
+          </div>
 
-    <ul id="slide-out" class="sidenav">
-      <li><div class="user-view">
-        <div class="background">
-          <img src="../../images/office.jpg" width="100%" height="100%">
-        </div>
-        <a href="#user"><img class="circle" src="../../images/'.$data['FOTO'].'"></a>
-        <br>
-        <br>
-        <li><div class="divider"></div></li>
-        <br>
-      </div></li>
-      <li><a id="inicio" href="./index.php"><i class="material-icons">home</i>Inicio</a></li>
-      <li><a href="../../conexion/logout.php"><i class="material-icons">logout</i>Cerrar Sesion</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Opciones</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">MATERIAS</a></li>
-      <li><a class="waves-effect" href="./nuevoAlumno.php"><i class="material-icons">assignment_ind</i>Ilustrador</a></li>
-      <li><a class="waves-effect" href="./nuevoDocente.php"><i class="material-icons">assignment_ind</i>Premiere Pro</a></li>
-      <li><a class="waves-effect" href="./nuevoAdministrador.php"><i class="material-icons">assignment_ind</i>Administración</a></li>
-      <li><div class="divider"></div></li>
-    <!--  <li><a class="subheader">Docentes</a></li>
-      <li><a class="waves-effect" href="#!"><i class="material-icons">assignment_ind</i>Nuevo Docente</a></li>-->
-    </ul>';
-    return $sidenav;
+    ';
+    return $modals;
   }
 
-  public function get_SideNavAdmin($arg_Cedula){
-    return $this->sideNavAdmin($arg_Cedula);
+
+
+  public function get_modals($arg_Cedula){
+    return $this->modals($arg_Cedula);
   }
 
-  public function get_SideNavEst($arg_Cedula){
-    return $this->sideNavEStudent($arg_Cedula);
-  }
+
 }

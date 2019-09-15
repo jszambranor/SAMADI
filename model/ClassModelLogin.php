@@ -14,26 +14,26 @@ class ModelLogin
             $objConexion = new Conexion();
             $conexion = $objConexion->get_Conexion();
         } catch (PDOException $e) {
-            echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+            echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().");</script>";
             die();
         }
 
         try {
             $query="SELECT * FROM SAMADI.USUARIOS WHERE USER = :_USER";
         } catch (PDOException $e) {
-            echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+            echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().");</script>";
         }
 
         try {
             $stmt = $conexion->prepare($query);
         } catch (PDOException $e) {
-            echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+            echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().");</script>";
         }
 
         try {
             $stmt->bindParam(':_USER', $arg_User, PDO::PARAM_STR);
         } catch (PDOException $e) {
-            echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().")</script>";
+            echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().");</script>";
         }
 
         try {
@@ -59,7 +59,7 @@ class ModelLogin
                 }
             }
         } catch (PDOException $e) {
-          echo "<script>alert('NO SE PUEDE EJECUTAR A LA CONSULTA'".$e->getMessage().")</script>";
+          echo "<script>alert('NO SE PUEDE EJECUTAR A LA CONSULTA'".$e->getMessage().");</script>";
         }
     }
 

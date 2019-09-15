@@ -25,7 +25,7 @@ public function generarCodigo($longitud) {
        $objConexion = new Conexion();
        $conexion = $objConexion->get_Conexion();
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().");</script>";
        die();
      }
 
@@ -34,19 +34,19 @@ public function generarCodigo($longitud) {
      try {
        $query = "SELECT ALUMNOS_CATEDRA.COD_CATEDRA,NOMBRE_CATEDRA,ICON FROM SAMADI.CATEDRAS, SAMADI.ALUMNOS_CATEDRA WHERE CEDULA = :_CEDULA AND ALUMNOS_CATEDRA.COD_CATEDRA = CATEDRAS.COD_CATEDRA";
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().");</script>";
      }
 
      try {
        $stmt = $conexion->prepare($query);
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().");</script>";
      }
 
      try {
         $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().");</script>";
      }
 
      try {
@@ -77,32 +77,32 @@ public function generarCodigo($longitud) {
        $objConexion = new Conexion();
        $conexion = $objConexion->get_Conexion();
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().");</script>";
        die();
      }
 
      try {
        $query = "INSERT INTO SAMADI.ALUMNOS_CATEDRA (CEDULA,COD_CATEDRA) VALUES (:_CEDULA,:_COD_CATEDRA)";
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE CREAR LA CONSULTA'".$e->getMessage().");</script>";
      }
 
      try {
        $stmt = $conexion->prepare($query);
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE PREPARAR LA CONSULTA'".$e->getMessage().");</script>";
      }
 
      try {
         $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
      } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().")</script>";
+       echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().");</script>";
      }
 
    try {
       $stmt->bindParam(':_COD_CATEDRA',$arg_Codigo,PDO::PARAM_STR);
    } catch (PDOException $e) {
-     echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().")</script>";
+     echo "<script>alert('NO SE PUEDE ENVIAR PARAMETROS A LA CONSULTA'".$e->getMessage().");</script>";
    }
 
    try {
@@ -116,7 +116,7 @@ public function generarCodigo($longitud) {
        return "NO TE REGISTRASTE EN LA CLASE";
      }
    } catch (PDOException $e) {
-     echo "<script>alert('ERROR NO TE PUEDES REGISTRAR'".$e->getMessage().")</script>";
+     echo "<script>alert('ERROR NO TE PUEDES REGISTRAR'".$e->getMessage().");</script>";
    }
 
  }
