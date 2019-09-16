@@ -57,7 +57,7 @@ class ModelCatedras
                         $cadena = $cadena.'
              <div class="catedras">
              <div class="img"><img src="../../images/catedras/'.$data["ICON"].'"></div>
-             <div class="nombre"><a href="./catedra.php?cod='.$data["COD_CATEDRA"].'">'.$data["NOMBRE_CATEDRA"].'</a></div>
+             <div class="nombre"><a href="./actividades.php?cod='.$data["COD_CATEDRA"].'">'.$data["NOMBRE_CATEDRA"].'</a></div>
              </div>';
                     }
                     return $cadena;

@@ -15,6 +15,10 @@ require_once '../../model/ClassModelCatedras.php';
 }else{
   echo '<meta http-equiv="refresh" content="0; url=../../login.php">';
 }*/
+$cod_catedra = $_GET['cod'];
+if (is_null($cod_catedra)) {
+  echo '<meta http-equiv="refresh" content="0; url=./index.php">';
+}
 $objConsultas = new ModelConsultas();
 $cedula = $objConsultas->get_DatosCorreo(/*$_SESSION['USER']*/'jszambrano@est.itsgg.edu.ec');
 $objCatedras = new ModelCatedras();

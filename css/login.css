@@ -172,7 +172,7 @@ button {
 }
 
 button:hover{
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 a {
