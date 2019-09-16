@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['USER'])) {
+/*if (isset($_SESSION['USER'])) {
   if ($_SESSION['TYPE'] != 1) {
     if ($_SESSION['TYPE'] == 2) {
       echo '<meta http-equiv="refresh" content="0; url=../docente/index.php">';
@@ -10,16 +10,15 @@ if (isset($_SESSION['USER'])) {
   }
 }else{
   echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
-}
+}*/
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
 require_once '../../controller/ClassControllerDocentes.php';
 require_once '../../model/ClassModelInsertPersonas.php';
 
-$sidenav = new Estruct();
-$get_Sidenav = $sidenav->get_SideNavAdmin($_SESSION['USER']);
 $Consultas = new ModelConsultas();
+$carrera =$Consultas->get_Carreras();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $Cedula = $_POST['cedula'];
@@ -47,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
   <body>
     <header>
-      <?php echo $get_Sidenav;  ?>
+
     </header>
     <center>
       <?php echo "<br><br><div class='estado'>".$mensaje."</div>"; ?>
@@ -78,6 +77,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="input-field col s12">
                             <input required="true" minlength="10"  maxlength="50" id="mail" name="mail" type="text" class="validate" onkeyup="Minus(this);" onkeypress="return soloMail(event)">
                             <label id="select-input" for="mail">CORREO ELECTRÓNICO *</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                          <select required="true" class="validate" name="carrera">
+                            <option value="" disabled selected>SELECCIONE LA CARRERA</option>
+                            <?php echo $carrera;  ?>
+                          </select>
                         </div>
 
                       <center>

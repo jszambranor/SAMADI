@@ -54,8 +54,7 @@ header {
   padding-right: 0%;
   background-color: white;
   border-radius: 7px 7px 7px 7px;
-  border-bottom-style: double;
-  border-color: #7D7D77;
+  border-color: #02265E;
 }
 
 @media only screen and (min-width: 579px) and (max-width :999px) {
@@ -131,9 +130,10 @@ input {
 }
 
 .titulo {
-  color: #7D7D77;
+  color: #02265E;
   margin-bottom: 3%;
   font-size: 20PX;
+  font-weight: bold;
 }
 
 .center {
@@ -169,6 +169,10 @@ button {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 4%;
+}
+
+button:hover{
+  cursor: crosshair;
 }
 
 a {

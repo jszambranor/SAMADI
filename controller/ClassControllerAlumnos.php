@@ -9,7 +9,7 @@ if (isset($_SESSION['USER'])) {
     }
   }
 }else{
-  echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
+  echo '<meta http-equiv="refresh" content="0; url=../login.php">';
 }
 /**
  *

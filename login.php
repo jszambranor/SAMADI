@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               <img src="./images/office.jpg" alt="">
             </div>
             <div class="titulo">
-              <span>Iniciar Sesión</span>
+              <span>INICIAR SESIÓN</span>
             </div>
             <div class="form">
               <form class="col s12" method="POST" action="./login.php">

@@ -9,14 +9,13 @@ if (isset($_SESSION['USER'])) {
     }
   }
 }else{
-  echo '<meta http-equiv="refresh" content="0; url=http://34.238.220.3/login.php">';
+  echo '<meta http-equiv="refresh" content="0; url=../../login.php">';
 }
 require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
 $cedula = '0992181293';
 $sidenav = new Estruct();
-$get_Sidenav = $sidenav->get_SideNavAdmin($cedula);
  ?>
 
 <!DOCTYPE html>
@@ -25,62 +24,54 @@ $get_Sidenav = $sidenav->get_SideNavAdmin($cedula);
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/estruct.css">
     <title>Inicio-ADMINISTRADOR</title>
   </head>
   <body>
     <header>
-      <?php echo $get_Sidenav;  ?>
+      <div class="navbar">
+        <div id="menu" class="left-items">
+          <a class="waves-effect modal-trigger" href="#modal1" ><i class="material-icons">menu</i></a>
+        </div>
+        <div id="logo" class="center-items">
+          <img src="../../images/logo.jpg" alt="">
+          <span>S A M </span>
+        </div>
+        <div id="avatar" class="right-items">
+          <a href="#modal3" class="waves-effect modal-trigger"><img class="circle" src="../../images/estudiantes/mifoto.png" alt=""></a>
+        </div>
+
+      </div>
     </header>
 
     <main>
 
       <div class="contenido">
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../images/icons/agregar-usuario.png" height="150px">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoAlumno.php">AGREGAR NUEVO ALUMNO</a><i class="material-icons right">more_vert</i></span>
-            <p></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO ALUMNO<i class="material-icons right">close</i></span>
-            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO ALUMNO A SAMADI</p>
-          </div>
+        <center>
+      <div class="card">
+        <div class="card-image">
+          <img src="../../images/icons/personas.png" style="width:95%;">
+          <span class="card-title"></span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red" href="./personas.php"><i class="material-icons">send</i></a>
         </div>
-
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../images/icons/agregar-usuario.png" height="150px">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoDocente.php">AGREGAR NUEVO DOCENTE</a><i class="material-icons right">more_vert</i></span>
-            <p></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO DOCENTE<i class="material-icons right">close</i></span>
-            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO DOCENTE A SAMADI</p>
-          </div>
+        <div class="card-content">
+          <a href="./personas.php"><p>PERSONAS</p></a>
         </div>
+      </div>
 
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../images/icons/agregar-usuario.png" height="150px">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><a id="link" href="./nuevoDocente.php">AGREGAR NUEVO ADMINISTRADOR</a><i class="material-icons right">more_vert</i></span>
-            <p></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">AGREGAR NUEVO ADMINISTRADOR<i class="material-icons right">close</i></span>
-            <p>ESTA OPCION TE PERMITE AGREGAR UN NUEVO ADMINISTRADOR A SAMADI</p>
-          </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="../../images/icons/catedras.png" style="width:95%; text-align:center;">
+          <span class="card-title"></span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red" href="./catedras.php"><i class="material-icons">send</i></a>
         </div>
-
-
+        <div class="card-content">
+          <a href="./catedras.php"><p>CATEDRAS</p></a>
         </div>
+      </div>
 
+      </div>
+    </center>
     </main>
 
 
@@ -89,6 +80,27 @@ $get_Sidenav = $sidenav->get_SideNavAdmin($cedula);
       background-color: #D6EAF8;
       border-radius: 0px 50px 50px 0px;
       width: 90%;
+    }
+    .contenido{
+      margin-top: 2%;
+
+    }
+    .card{
+      width: 25%;
+      margin-left: 2%;
+      display: inline-block;
+      float: left
+    }
+
+    .card-content p{
+      color:#02265E;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .center-items{
+      margin-top: 1%;
+      float: left;
     }
 
     </style>
