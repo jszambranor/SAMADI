@@ -8,6 +8,49 @@ class ModelConsultas
     {
     }
 
+    private function nombre_Catedra($cod_Catedra){
+      try {
+        $objConexion= new Conexion();
+        $conexion = $objConexion->get_Conexion();
+      } catch (PDOException $e) {
+
+      }
+
+      try {
+        $query = "SELECT NOMBRE_CATEDRA FROM SAMADI.CATEDRAS WHERE COD_CATEDRA = :_CATEDRA";
+      } catch (PDOException $e) {
+
+      }
+
+      try {
+        $stmt = $conexion->prepare($query);
+      } catch (PDOException $e) {
+
+      }
+
+      try {
+        $stmt->bindParam(':_CATEDRA',$cod_Catedra,PDO::PARAM_STR);
+      } catch (PDOException $e) {
+
+      }
+
+      try {
+        if (isset($stmt)) {
+          if ($stmt->execute()) {
+            $data = $stmt->fetch();
+            return $data['NOMBRE_CATEDRA'];
+          }else {
+            return null;
+          }
+        }else {
+          return null;
+        }
+      } catch (PDOException $e) {
+
+      }
+
+    }
+
     private function exists_personas($arg_Cedula)
     {
         try {
@@ -246,5 +289,9 @@ class ModelConsultas
     public function get_Exists_Personas($arg_Cedula)
     {
         return $this->exists_personas($arg_Cedula);
+    }
+
+    public function get_NombreCatedra($codigo){
+      return $this->nombre_Catedra($codigo);
     }
 }

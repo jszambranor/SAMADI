@@ -52,8 +52,11 @@ $header = $objEstruct->get_modals($cedula['CEDULA']);
       </div>
     </center>
 
+    <div class="background">
+      <img src="../../images/background.jpeg" alt="">
+    </div>
     </main>
-    
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript" src="../../js/init.js"></script>

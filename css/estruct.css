@@ -1,3 +1,13 @@
+.background{
+  position: absolute;
+  margin-bottom: 50%;
+
+}
+
+.background img{
+  opacity: 1;
+}
+
 .navbar {
   background-color: #02265E;
   width: 100%;
