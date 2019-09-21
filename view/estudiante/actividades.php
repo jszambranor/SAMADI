@@ -25,7 +25,7 @@ $objCatedras = new ModelCatedras();
 $catedras = $objCatedras->get_Catedras($cedula['CEDULA']);
 $nombres = $objConsultas->get_Datos($cedula['CEDULA']);
 $objEstruct = new Estruct();
-$header = $objEstruct->get_modals($cedula['CEDULA']);
+$header = $objEstruct->get_Sidenav($_SESSION['USER']);
  ?>
 
 <!DOCTYPE html>

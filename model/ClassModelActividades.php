@@ -16,7 +16,7 @@ class ModelActividades
         }
 
         try {
-            $query = "CALL SAMADI.CREATE_ACTIVIDADES(:_CODIGO_A,CODIGO_C,:_NOMBRE,:_DESCRIPCION,:_RUTA)";
+            $query = "CALL SAMADI.CREATE_ACTIVIDADES(:_CODIGO_A,:_CODIGO_C,:_NOMBRE,:_DESCRIPCION,:_RUTA)";
         } catch (PDOException $e) {
           echo "<script>alert('".$e->getMessage."')";
         }
@@ -74,6 +74,8 @@ class ModelActividades
         }
     }
 
+    public function set_Actividad($arg_Codigo, $arg_CodCatedra, $arg_Nombre, $arg_Descrip, $arg_Ruta){
+      return $this->newActividades($arg_Codigo, $arg_CodCatedra, $arg_Nombre, $arg_Descrip, $arg_Ruta);
+    }
 
-    
 }

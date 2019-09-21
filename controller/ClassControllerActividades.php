@@ -1,12 +1,14 @@
 <?php
+require_once '../conexion/ClassConexion.php';
+require_once '../model/ClassModelActividades.php';
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $codigo_actividad = $_POST['codigo_actividad'];
-            $codigo_catedra = $_POST['codigo_catedra'];
-            $nombre = $_POST['nombre'];
-            $descipcion = $_POST['descripcion'];
-            $ruta =  $_POST['ruta'];
+          echo  $codigo_actividad = $_POST['cod_actividad'];echo "<br>";
+          echo  $codigo_catedra = $_POST['cod_catedra'];echo "<br>";
+          echo  $nombre = $_POST['nombre'];echo "<br>";
+          echo  $descripcion = $_POST['descripcion'];echo "<br>";
+          echo  $ruta = "actividades/".$nombre."/".$nombre."."."htm";echo "<br>";
 
-            $images_array = array('image/jpg','image/pjpeg','image/bmp','image/jpeg','image/gif','image/png');
+        /*    $images_array = array('image/jpg','image/pjpeg','image/bmp','image/jpeg','image/gif','image/png');
             $js_array = array('application/x-javascript', 'application/javascript', 'application/ecmascript','text/javascript','text/ecmascript');
             $css_array = array('application/x-pointplus','text/css');
             $html_array = array('text/html');
@@ -69,4 +71,7 @@
                   }
                 }
               }
+              */
+                $objModelActividad = new ModelActividades();
+                echo $subir_actividad = $objModelActividad->set_Actividad($codigo_actividad, $codigo_catedra, $nombre, $descripcion, $ruta);
             }

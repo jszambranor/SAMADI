@@ -2,79 +2,132 @@
 
 class Estruct
 {
+    public function __construct()
+    {
+    }
 
-  function __construct()
-  {
 
-  }
+    private function sidenav($user)
+    {
+        try {
+            $objConexion = new Conexion();
+            $conexion = $objConexion->get_Conexion();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $query = "SELECT CEDULA,NOMBRES,APELLIDOS,CORREO FROM SAMADI.PERSONAS WHERE CORREO = :_CORREO";
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
-  private function modals($arg_Cedula){
-    try {
-      $objConexion = new Conexion;
-      $conexion = $objConexion->get_Conexion();
-    } catch (PDOException $e) {
-       echo "<script>alert('NO SE PUEDE CREAR LA CONEXION A LA BASE DE DATOS'".$e->getMessage().")</script>";
-       die();
-     }
-    $query = "SELECT NOMBRES,APELLIDOS FROM SAMADI.PERSONAS WHERE CEDULA = :_CEDULA";
-    $stmt=$conexion->prepare($query);
-    $stmt->bindParam(':_CEDULA',$arg_Cedula,PDO::PARAM_STR);
-    $stmt->execute();
-    $nombres = $stmt->fetch();
-    $modals = '
+        try {
+            $stmt = $conexion->prepare($query);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
-    <div class="navbar">
-      <div id="menu" class="left-items">
-        <a class="waves-effect modal-trigger" href="#modal1" ><i class="material-icons">menu</i></a>
-      </div>
-      <div id="logo" class="center-items">
-        <img src="../../images/logo.jpg" alt="">
-        <span>S A M </span>
-      </div>
-      <div id="avatar" class="right-items">
-        <a href="#modal3" class="waves-effect modal-trigger"><img class="circle" src="../../images/estudiantes/mifoto.png" alt=""></a>
-      </div>
-    </div>
+        try {
+            $stmt->bindParam(':_CORREO', $user, PDO::PARAM_STR);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
-    <div id="modal1" class="modal">
-      <ul class="slide-out">
-        <li><a class="li" id="temas" href="./index.php">INICIO</a></li>
-        <li><a class="li" id="actividadesli" href="./actividades.php">ACTIVIDADES</a></li>
-        <li><a class="li" id="guia" href="./materialapoyo.php">MATERIAL DE APOYO</a></li>
-        <li><a class="li" id="bibliografia" href="./bibliografias.php">BIBLIOGRAFÍAS</a></li>
-      </ul>
+        try {
+            if (isset($stmt)) {
+                try {
+                    if ($stmt->execute()) {
+                        $data=$stmt->fetch();
+                        $stmt = null;
+                    }
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                echo "<script>alert('LA CONSULTA NO ESTA DEFINIDA')</script>";
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
-      </div>
+        try {
+            $query1 = "SELECT * FROM SAMADI.ALUMNOS_CATEDRA, SAMADI.CATEDRAS WHERE CEDULA = :_CEDULA AND ALUMNOS_CATEDRA.COD_CATEDRA = CATEDRAS.COD_CATEDRA";
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
-      <div id="modal2" class="modal">
-        <form class="registro_clase" action="index.php" method="post">
-          <label for="codigo_catedra">INGRESA EL CODIGO DE LA CLASE</label>
-          <input id="cod_clase"  type="text" name="codigo_catedra" value=""><br>
-          <button id="registro" class="btn" type="submit" name="button">REGISTRAR</button>
-        </form>
+        try {
+            $stmt = $conexion->prepare($query1);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        $cedula = $data['CEDULA'];
+        try {
+            $stmt->bindParam(':_CEDULA', $cedula, PDO::PARAM_STR);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+
+        try {
+            if (isset($stmt)) {
+                try {
+                    if ($stmt->execute()) {
+                      $cat = '';
+                        while ($catedras = $stmt->fetch()) {
+                            $cat = $cat . '
+              <li><a class="waves-effect" href="./actividades.php?cod='.$catedras['COD_CATEDRA'].'">'.$catedras['NOMBRE_CATEDRA'].'</a></li>
+              ';
+                        }
+                    }else {
+                      echo "error";
+                    }
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                echo "CONSULTA NO DEFINIDA";
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+
+
+
+        $sidenav = '
+        <div class="navbar">
+          <div id="menu" class="left-items">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          </div>
+          <div id="logo" class="center-items">
+            <img src="../../images/logo.jpg" alt="">
+            <span>S A M </span>
+          </div>
         </div>
-
-        <div id="modal3" class="modal">
-          <div class="nombres">
-            <span id="nombre">BIENVENIDO</span><br>
-            <span id="nombre"><?php echo $nombres["NOMBRES"]; ?></span>
-            <span id="nombre"><?php echo $nombres["APELLIDOS"]; ?></span>
-          </div>
-          <div class="link">
-            <a href="../micuenta.php?cedula="><i class="material-icons">account_circle</i> MI CUENTA</a><br>
-            <a href="../../conexion/logout.php"><i class="material-icons">logout</i> CERRAR SESIÓN</a>
-          </div>
-          </div>
-
+      <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+      <div class="background">
+      <img src="images/office.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#name"><span class="white-text name">'.$data['NOMBRES'].'</span></a>
+      <a href="#name"><span class="white-text name">'.$data['APELLIDOS'].'</span></a>
+      <a href="#email"><span class="white-text email">'.$data['CORREO'].'</span></a>
+      </div></li>
+      <li><a href="#!"><i class="material-icons">home</i>Inicio</a></li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Mis Clases</a></li>
+      '.$cat.'
+      </ul>
     ';
-    return $modals;
-  }
+
+        return $sidenav;
+    }
 
 
-
-  public function get_modals($arg_Cedula){
-    return $this->modals($arg_Cedula);
-  }
-
+    public function get_Sidenav($correo){
+      return $this->sidenav($correo);
+    }
 
 }
