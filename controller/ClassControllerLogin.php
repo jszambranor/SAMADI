@@ -1,7 +1,5 @@
 <?php
-/**
- *
- */
+
 class ControllerLogin
 {
     public function __construct()

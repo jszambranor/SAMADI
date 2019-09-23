@@ -20,8 +20,11 @@ class Conexion
   {
     try {
       $connect = new PDO("mysql:host=$this->host;dbname=$this->db",$this->user,$this->password);
+      $query = "SET NAMES 'utf8'";
+      $stmt = $connect->prepare($query);
+      $stmt->execute();
     } catch (PDOException $e) {
-      echo "<script>alert('NO SE PUEDE CONECTAR A LA BASE DE DATOS'".$e->getMessage().")</script>";
+      echo "<script>alert('NO SE PUEDE CONECTAR A LA BASE DE DATOS'".$e->getMessage().");</script>";
       die();
     }
 

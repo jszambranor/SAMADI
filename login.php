@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./css/login.css">
-    <title>Inicio-ADMINISTRADOR</title>
+    <title>Inicio</title>
   </head>
   <body>
     <header>
@@ -64,7 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                           <button class="button" type="submit" name="action" id="btn">ENTRAR</button>
                           <br>
                           <a href="#">Olvidé mi Contraseña...</a>
-                          <?php echo "<br><br><div class='estado'>".$estado."</div>"; ?>
+                          <?php if (isset($estado)) {
+                          echo "<br><br><div class='estado'>".$estado."</div>";
+                          } ?>
                       </div>
               </form>
             </div>

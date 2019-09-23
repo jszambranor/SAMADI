@@ -1,3 +1,18 @@
+body{
+  font-family: sans-serif;
+}
+
+header, main, footer {
+     padding-left: 300px;
+   }
+
+   @media only screen and (max-width : 992px) {
+     header, main, footer {
+       padding-left: 0;
+     }
+   }
+
+
 .background{
   position: absolute;
   margin-bottom: 50%;
@@ -28,7 +43,7 @@ main {
 
 .title {
   width: 100%;
-  background-color: #02265E;
+  background-color: #0E6655;
   font-weight: bold;
   font-size: 2rem;
   text-align: center;
@@ -37,11 +52,10 @@ main {
 
 .contenido {
   width: 80%;
-  margin-top: 5%;
 }
 
 .catedras {
-  width: 20%;
+  width: 30%;
   display: inline-block;
   background-color: #FFFFFF;
   text-align: center;
@@ -54,10 +68,11 @@ main {
   margin-top: 2%;
   margin-bottom: 1%;
   margin-left: 2%;
+  float: left;
 }
 
 .nombre, .nombre a {
-  background-color: #02265E;
+  background-color: #D35400;
   color: #FFFFFF;
 }
 
@@ -74,7 +89,6 @@ main {
 
 .right-items {
   float: right;
-  max-width: 40px;
 }
 
 .right-items i {
@@ -274,3 +288,12 @@ main {
   color: #02265E;
   font-size: 3rem;
 }
+
+#catedrasli:hover{
+   background-color: #F0B27A;
+   border-radius: 0px 50px 50px 0px;
+ }
+
+ .contenido{
+   width: 100%;
+ }

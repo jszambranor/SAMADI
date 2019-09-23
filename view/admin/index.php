@@ -15,7 +15,8 @@ require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
 $cedula = '0992181293';
-$sidenav = new Estruct();
+$objEstruct = new Estruct();
+$header = $objEstruct->get_Sidenav($_SESSION['USER']);
  ?>
 
 <!DOCTYPE html>
@@ -29,19 +30,7 @@ $sidenav = new Estruct();
   </head>
   <body>
     <header>
-      <div class="navbar">
-        <div id="menu" class="left-items">
-          <a class="waves-effect modal-trigger" href="#modal1" ><i class="material-icons">menu</i></a>
-        </div>
-        <div id="logo" class="center-items">
-          <img src="../../images/logo.jpg" alt="">
-          <span>S A M </span>
-        </div>
-        <div id="avatar" class="right-items">
-          <a href="#modal3" class="waves-effect modal-trigger"><img class="circle" src="../../images/estudiantes/mifoto.png" alt=""></a>
-        </div>
-
-      </div>
+      <?php echo $header; ?>
     </header>
 
     <main>
@@ -102,6 +91,7 @@ $sidenav = new Estruct();
       margin-top: 1%;
       float: left;
     }
+
 
     </style>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>

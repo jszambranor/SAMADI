@@ -4,6 +4,7 @@ require_once '../../conexion/ClassConexion.php';
 require_once '../../model/ClassModelConsultas.php';
 require_once '../../estruct/header.php';
 require_once '../../model/ClassModelCatedras.php';
+require_once '../../model/ClassModelActividades.php';
 /*if (isset($_SESSION['USER'])) {
   if ($_SESSION['TYPE'] != 3) {
     if ($_SESSION['TYPE'] == 1) {
@@ -15,10 +16,7 @@ require_once '../../model/ClassModelCatedras.php';
 }else{
   echo '<meta http-equiv="refresh" content="0; url=../../login.php">';
 }*/
-$cod_catedra = $_GET['cod'];
-if (is_null($cod_catedra)) {
-  echo '<meta http-equiv="refresh" content="0; url=./index.php">';
-}
+
 $objConsultas = new ModelConsultas();
 $cedula = $objConsultas->get_DatosCorreo(/*$_SESSION['USER']*/'jszambrano@est.itsgg.edu.ec');
 $objCatedras = new ModelCatedras();
@@ -26,18 +24,29 @@ $catedras = $objCatedras->get_Catedras($cedula['CEDULA']);
 $nombres = $objConsultas->get_Datos($cedula['CEDULA']);
 $objEstruct = new Estruct();
 $header = $objEstruct->get_Sidenav($_SESSION['USER']);
+$objActividades = new ModelActividades();
+$exists_Actividades = $objActividades->get_ExistsActividades($_GET['cod']);
+
  ?>
 
 <!DOCTYPE html>
 <html lang="es-ES" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../../css/estruct.css">
     <title>ACTIVIDADES</title>
   </head>
   <body>
+    <?php
+    $id = $_GET['cod'];
+    echo $style = '<style media="screen">#'.$id.'{
+      background-color: #AED6F1;
+      border-radius: 0px 50px 50px 0px;
+      width: 80%;
+    }</style>';
+     ?>
     <header>
       <?php echo $header; ?>
     </header>
@@ -56,32 +65,12 @@ $header = $objEstruct->get_Sidenav($_SESSION['USER']);
             <span>ACTIVIDADES</span>
           </div>
           <div id="row-actividades" class="row">
-            <ul class="collapsible">
-              <li>
-                <div class="collapsible-header"><i class="material-icons">extension</i>ACTIVIDAD 1<i class="right material-icons">keyboard_arrow_down</i></div>
-                <div class="collapsible-body">
-                  <span>NOMBRE DE LA ACTIVIDAD</span><br><br>
-                  <span>DESCRIPCION DE LA ACTIVIDAD</span><br>
-                  <a href="#">VER ACTIVIDAD</a>
-                </div>
-              </li>
-              <li>
-                <div class="collapsible-header"><i class="material-icons">layers</i>ACTIVIDAD 2<i class="right material-icons">keyboard_arrow_down</i></div>
-                <div class="collapsible-body">
-                  <span>NOMBRE DE LA ACTIVIDAD</span><br><br>
-                  <span>DESCRIPCION DE LA ACTIVIDAD</span><br>
-                  <a href="#">VER ACTIVIDAD</a>
-                </div>
-              </li>
-              <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>ACTIVIDAD 3<i class="right material-icons">keyboard_arrow_down</i></div>
-                <div class="collapsible-body">
-                  <span>NOMBRE DE LA ACTIVIDAD</span><br><br>
-                  <span>DESCRIPCION DE LA ACTIVIDAD</span><br>
-                  <a href="#">VER ACTIVIDAD</a>
-                </div>
-              </li>
-            </ul>
+            <center>
+            <div class="contenedor">
+                <?php echo $exists_Actividades; ?>
+            </div>
+          </center>
+
           </div>
         </div>
         <div id="guiasvisuales" class="col s12">
@@ -122,6 +111,33 @@ $header = $objEstruct->get_Sidenav($_SESSION['USER']);
           </div>
         </div>
       </div>
+
+      <style media="screen">
+        .contenedor{
+          width: 90%;
+
+        }
+        .card{
+          width: 30%;
+          display: inline-block;
+          margin-left: 2%;
+          float: left;
+        }
+
+        #catedrasli{
+          font-weight: bold;
+        }
+
+        li a:hover{
+          background-color: #fff;
+        }
+        #catedrasli:hover{
+           background-color: #F0B27A;
+           border-radius: 0px 50px 50px 0px;
+         }
+
+      </style>
+
 
 
     </main>

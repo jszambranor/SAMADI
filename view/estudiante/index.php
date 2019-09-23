@@ -42,9 +42,6 @@ $header = $objEstruct->get_Sidenav($_SESSION['USER']);
     <main>
       <center>
       <div class="contenido">
-        <div class="title">
-          <span>MATERIAS</span>
-        </div>
 
         <div class="materias">
           <?php echo $catedras; ?>
@@ -53,6 +50,24 @@ $header = $objEstruct->get_Sidenav($_SESSION['USER']);
     </center>
 
     </main>
+
+    <style media="screen">
+      .contenido{
+        width: 100%;
+      }
+
+      #inicio{
+        background-color: #AED6F1;
+        border-radius: 0px 50px 50px 0px;
+        width: 80%;
+      }
+
+      #select:hover{
+        background-color: #C0392B;
+        border-radius: 0px 50px 50px 0px;
+        width: 80%;
+      }
+    </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

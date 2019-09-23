@@ -74,9 +74,9 @@ class Estruct
                 try {
                     if ($stmt->execute()) {
                       $cat = '';
-                        while ($catedras = $stmt->fetch()) {
+                        while ($catedras = $stmt->fetch()){
                             $cat = $cat . '
-              <li><a class="waves-effect" href="./actividades.php?cod='.$catedras['COD_CATEDRA'].'">'.$catedras['NOMBRE_CATEDRA'].'</a></li>
+              <li class="init" id="select"><a id="catedrasli" class="waves-effect" href="./actividades.php?cod='.$catedras['COD_CATEDRA'].'"><i class="material-icons">layers</i>'.$catedras['NOMBRE_CATEDRA'].'</a></li>
               ';
                         }
                     }else {
@@ -98,24 +98,25 @@ class Estruct
         $sidenav = '
         <div class="navbar">
           <div id="menu" class="left-items">
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <!--<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
           </div>
           <div id="logo" class="center-items">
             <img src="../../images/logo.jpg" alt="">
             <span>S A M </span>
           </div>
         </div>
-      <ul id="slide-out" class="sidenav">
+      <ul id="slide-out" class="sidenav sidenav-fixed">
       <li><div class="user-view">
       <div class="background">
-      <img src="images/office.jpg">
+      <img src="../../images/background.jpeg" width="100%" heigth="100%">
       </div>
-      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#user"><img class="circle" src="../../images/background.jpeg"></a>
       <a href="#name"><span class="white-text name">'.$data['NOMBRES'].'</span></a>
       <a href="#name"><span class="white-text name">'.$data['APELLIDOS'].'</span></a>
       <a href="#email"><span class="white-text email">'.$data['CORREO'].'</span></a>
       </div></li>
-      <li><a href="#!"><i class="material-icons">home</i>Inicio</a></li>
+      <li><a id="catedrasli" href="./index.php"><i class="material-icons">home</i>INICIO</a></li>
+      <li id="select"><a id="catedrasli" href="/conexion/logout.php"><i class="material-icons">logout</i>CERRAR SESION</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Mis Clases</a></li>
       '.$cat.'

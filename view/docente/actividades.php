@@ -24,7 +24,6 @@ $codigo = $objCatedras->generarCodigo(6);
   </head>
   <body>
     <header>
-      <?php echo $navbar; ?>
       <?php echo  $header; ?>
     </header>
     <main>
@@ -39,15 +38,9 @@ $codigo = $objCatedras->generarCodigo(6);
         <div id="subir_actividades" class="col s12">
           <div id="row-actividades" class="row">
             <div class="section container">
-            <div class="row card-panel">
+            <div class="row">
            <form class="col s12" action="../../controller/ClassControllerActividades.php" method="post" enctype="multipart/form-data" method="POST">
              <div class="row">
-               <div class="input-field col s12">
-                 <input hidden type="text" name="cod_catedra" value="<?php echo $cod_catedra ?>" id="cod_catedra" class="validate">
-               </div>
-               <div class="input-field col s12">
-                 <input hidden type="text" name="cod_actividad" value="<?php echo $codigo ?>" id="cod_actividad" class="validate">
-               </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
@@ -109,6 +102,12 @@ $codigo = $objCatedras->generarCodigo(6);
               </div>
             </div>
              </div>
+             <div class="input-field col s6">
+               <input hidden type="text" name="cod_catedra" value="<?php echo $cod_catedra ?>" id="cod_catedra" class="validate">
+             </div>
+             <div class="input-field col s6">
+               <input hidden type="text" name="cod_actividad" value="<?php echo $codigo ?>" id="cod_actividad" class="validate">
+             </div>
              <center>
               <button class="btn waves-effect waves-light" type="submit" name="action">PUBLICAR ACTIVIDAD</button>
             </center>
@@ -155,6 +154,11 @@ $codigo = $objCatedras->generarCodigo(6);
       </div>
     </main>
 
+    <style media="screen">
+      .section{
+        width: 100%;
+      }
+    </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
